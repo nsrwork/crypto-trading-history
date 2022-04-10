@@ -1,0 +1,27 @@
+{
+  "name": "crypto-trading-history",
+  "version": "0.0.1",
+  "description": "Journal of aggregated trades",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsrwork/crypto-trading-history.git"
+  },
+  "author": "nsrwork",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nsrwork/crypto-trading-history/issues"
+  },
+  "homepage": "https://github.com/nsrwork/crypto-trading-history",
+  "devDependencies": {
+    "prettier": "2.6.2",
+    "vitest": "^0.9.3"
+  },
+  "dependencies": {
+    "currency.js": "^2.0.4"
+  }
+}
