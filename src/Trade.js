@@ -116,11 +116,11 @@ export class Trade {
     return this.side === "BUY" ? "LONG" : "SHORT";
   }
 
-  openNewPosition({ symbol, side, openTime }) {
+  openNewPosition({ symbol, side, openTime, tickSize, pricePrecision }) {
     this.isOpen = true;
     this.symbol = symbol;
-    this.tickSize = getTickSize(symbol);
-    this.pricePrecision = getPricePrecision(symbol);
+    this.tickSize = tickSize;
+    this.pricePrecision = pricePrecision;
     this.openPrice = [];
     this.closePrice = [];
     this.openTime = openTime;
