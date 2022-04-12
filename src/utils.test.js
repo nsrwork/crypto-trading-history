@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest/dist";
+import { describe, expect, it } from "vitest";
 import { calAveragePrice, calPriceChangeInPercentage } from "./utils";
 
 describe("Testing util functions", () => {

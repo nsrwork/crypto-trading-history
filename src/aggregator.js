@@ -35,6 +35,8 @@ export function tradeAggregator(rawTrades) {
         symbol: raw.symbol,
         side: raw.side,
         openTime: raw.time,
+        tickSize: getTickSize(raw.symbol),
+        pricePrecision: getPricePrecision(raw.symbol)
       });
       trade.modifyPosition({
         side: raw.side,
