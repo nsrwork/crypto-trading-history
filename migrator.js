@@ -9216,9 +9216,8 @@ const exchangeInfo = {
 
 const symbolObj = exchangeInfo.symbols.map((symbol) => {
   return {
-    symbol: symbol.symbol,
-    pricePrecision: symbol.pricePrecision,
-    tickSize: symbol.filters[0].tickSize,
+    s: symbol.symbol,
+    t: symbol.filters[0].tickSize,
   };
 });
 

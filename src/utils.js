@@ -8,3 +8,7 @@ export function calPriceChangeInPercentage(openPrice, closePrice) {
 export function calAveragePrice(list) {
   return list.reduce((a, b) => Number(a) + Number(b), 0) / list.length;
 }
+
+export function calPricePrecision(ticketSize) {
+  return +ticketSize.slice(ticketSize.indexOf("."), ticketSize.length).length - 1;
+}

@@ -5,10 +5,7 @@ export declare class Trade {
   getAverageClosePrice(): string;
   getPriceChangeInPercent(): string;
   calVolume(): void;
-  addVolume({ quantity, price }: {
-    quantity: any;
-    price: any;
-  }): void;
+  addVolume({ quantity, price }: { quantity: any; price: any }): void;
   getVolume(): string;
   calPositionSize(): void;
   addSizeToPosition(size: any): void;
@@ -20,7 +17,13 @@ export declare class Trade {
   getFees(): string;
   addFees(fees: any): void;
   getSide(): "LONG" | "SHORT";
-  openNewPosition({ symbol, side, openTime, tickSize, pricePrecision }: {
+  openNewPosition({
+    symbol,
+    side,
+    openTime,
+    tickSize,
+    pricePrecision,
+  }: {
     symbol: any;
     side: any;
     openTime: any;
@@ -28,14 +31,15 @@ export declare class Trade {
     pricePrecision: any;
   }): void;
   isPositionNotEmpty(): boolean;
-  increasePosition({ price, quantity }: {
-    price: any;
-    quantity: any;
-  }): void;
-  closePosition({ closeTime }: {
-    closeTime: any;
-  }): void;
-  modifyPosition({ side, price, quantity, realizedPnl, fees }: {
+  increasePosition({ price, quantity }: { price: any; quantity: any }): void;
+  closePosition({ closeTime }: { closeTime: any }): void;
+  modifyPosition({
+    side,
+    price,
+    quantity,
+    realizedPnl,
+    fees,
+  }: {
     side: any;
     price: any;
     quantity: any;
@@ -56,5 +60,9 @@ export declare function groupRawTradesBySymbols(rawData: any): any[][];
 export declare function getProps(symbolName: any): any;
 
 // utils.js
-export declare function calPriceChangeInPercentage(openPrice: any, closePrice: any): number;
+export declare function calPriceChangeInPercentage(
+  openPrice: any,
+  closePrice: any
+): number;
 export declare function calAveragePrice(list: any): number;
+export declare function calPricePrecision(ticketSize: string): number;
