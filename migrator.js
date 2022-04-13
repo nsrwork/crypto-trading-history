@@ -9214,27 +9214,12 @@ const exchangeInfo = {
   ],
 };
 
-const tickSizeStorage = [];
-const pricePrecisionStorage = [];
+const symbolObj = exchangeInfo.symbols.map((symbol) => {
+  return {
+    symbol: symbol.symbol,
+    pricePrecision: symbol.pricePrecision,
+    tickSize: symbol.filters[0].tickSize,
+  };
+});
 
-export function getTickSize(symbolName) {
-  if (!tickSizeStorage[symbolName]) {
-    const symbolObj = exchangeInfo.symbols.filter(
-      (coin) => coin.symbol === symbolName
-    );
-    tickSizeStorage[symbolName] = symbolObj[0].filters[0].tickSize;
-  }
-
-  return +tickSizeStorage[symbolName];
-}
-
-export function getPricePrecision(symbolName) {
-  if (!pricePrecisionStorage[symbolName]) {
-    const symbolObj = exchangeInfo.symbols.filter(
-      (coin) => coin.symbol === symbolName
-    );
-    pricePrecisionStorage[symbolName] = symbolObj[0].pricePrecision;
-  }
-
-  return +pricePrecisionStorage[symbolName];
-}
+console.log(JSON.stringify(symbolObj));

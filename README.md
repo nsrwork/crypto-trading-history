@@ -1,12 +1,15 @@
 ### Trade history log aggregated by positions
+
 For example, you opened several transactions for coin pairs and after some time closed in parts.
 In the exchange report, you will see several transactions. This library will combine all transactions
 and display the aggregated result, calculate additional data and make it more readable.
+
 ### Make a request and get all the data you will be aggregating
 
-```GET /fapi/v1/userTrades``` https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data
+`GET /fapi/v1/userTrades` https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data
 
 You will get response something like below:
+
 ```
   {
     symbol: "1000SHIBUSDT",
@@ -28,10 +31,13 @@ You will get response something like below:
 ```
 
 Use `tradeAggregator` or `groupAggregatedTrades` functions for aggregate trades:
+
 ```js
 const trades = tradeAggregator(rawTrades);
 ```
+
 Result:
+
 ```
   {
     openTime: 1640341654465,
@@ -49,6 +55,7 @@ Result:
 ```
 
 For more examples read tests :)
-### Exchange support
-Binance
 
+### Exchange support
+
+Binance

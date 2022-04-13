@@ -1,5 +1,5 @@
 import { Trade } from "./Trade";
-import {getPricePrecision, getTickSize} from "./binanceExchangeInfo";
+import { getProps } from "./symbolProperties";
 
 export function tradeAggregator(rawTrades) {
   const trade = new Trade();
@@ -15,8 +15,8 @@ export function tradeAggregator(rawTrades) {
         symbol: raw.symbol,
         side: raw.side,
         openTime: raw.time,
-        tickSize: getTickSize(raw.symbol),
-        pricePrecision: getPricePrecision(raw.symbol)
+        tickSize: getProps(raw.symbol).tickSize,
+        pricePrecision: getProps(raw.symbol).pricePrecision,
       });
     }
 
@@ -35,8 +35,8 @@ export function tradeAggregator(rawTrades) {
         symbol: raw.symbol,
         side: raw.side,
         openTime: raw.time,
-        tickSize: getTickSize(raw.symbol),
-        pricePrecision: getPricePrecision(raw.symbol)
+        tickSize: getProps(raw.symbol).tickSize,
+        pricePrecision: getProps(raw.symbol).pricePrecision,
       });
       trade.modifyPosition({
         side: raw.side,

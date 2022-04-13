@@ -3,3 +3,6 @@ code-style-fix:
 
 push-npm:
 	npm publish --access public
+
+update-binance-info:
+	node migrator.js > info.json
