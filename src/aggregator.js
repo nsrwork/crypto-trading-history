@@ -1,6 +1,6 @@
 import { Trade } from "./Trade";
 import { getProps } from "./symbolProperties";
-import {calPricePrecision} from "./utils";
+import { calPricePrecision } from "./utils";
 
 export function tradeAggregator(rawTrades) {
   const trade = new Trade();

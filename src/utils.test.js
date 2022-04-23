@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import {calAveragePrice, calPriceChangeInPercentage, calPricePrecision} from "./utils";
+import {
+  calAveragePrice,
+  calPriceChangeInPercentage,
+  calPricePrecision,
+} from "./utils";
 
 describe("Testing util functions", () => {
   it("Calculate a price change in percentage", () => {
@@ -40,9 +44,7 @@ describe("Testing util functions", () => {
   });
 
   it("Calculate a price precision", () => {
-    const mock = ["0.1","0.01","0","0.000010"];
-    expect(mock.map((item) => calPricePrecision(item))).eql([
-      1, 2, 0, 6
-    ]);
+    const mock = ["0.1", "0.01", "0", "0.000010"];
+    expect(mock.map((item) => calPricePrecision(item))).eql([1, 2, 0, 6]);
   });
 });

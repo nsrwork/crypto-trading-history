@@ -10,5 +10,7 @@ export function calAveragePrice(list) {
 }
 
 export function calPricePrecision(ticketSize) {
-  return +ticketSize.slice(ticketSize.indexOf("."), ticketSize.length).length - 1;
+  return (
+    +ticketSize.slice(ticketSize.indexOf("."), ticketSize.length).length - 1
+  );
 }
