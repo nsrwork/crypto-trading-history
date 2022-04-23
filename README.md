@@ -1,61 +1,92 @@
-### Trade history log aggregated by positions
+### Trade aggregator
 
-For example, you opened several transactions for coin pairs and after some time closed in parts.
-In the exchange report, you will see several transactions. This library will combine all transactions
-and display the aggregated result, calculate additional data and make it more readable.
+Imagine you open a position and gradually add up to the working volume.
+After reaching the desired price, you decide to close the position, also in parts.
+In fact, it was one trade, but in the reports you will see several transactions at once.
 
-### Make a request and get all the data you will be aggregating
+This library aggregates transactions and displays:
+- complete trade report
+- profit minus commission
+- percentage of price movement
+- the volume that was at the peak in dollars and coins
 
-`GET /fapi/v1/userTrades` https://binance-docs.github.io/apidocs/futures/en/#position-information-v2-user_data
-
-You will get response something like below:
-
-```
-  {
-    symbol: "1000SHIBUSDT",
-    id: 421178634,
-    orderId: 4997953617,
-    side: "BUY",
-    price: "0.038400",
-    qty: "1000",
-    realizedPnl: "0",
-    marginAsset: "USDT",
-    quoteQty: "38.400000",
-    commission: "0.00768000",
-    commissionAsset: "USDT",
-    time: 1640341654465,
-    positionSide: "BOTH",
-    buyer: true,
-    maker: true
-  }
+### How to install
+```bash
+npm i crypto-trading-history
 ```
 
-Use `tradeAggregator` or `groupAggregatedTrades` functions for aggregate trades:
+### How to use
+
+Currently, only the Binance Futures crypto exchange is supported.
+The data to be aggregated should be obtained from the API:
+```
+GET /fapi/v1/userTrades
+```
+[API Documentation](https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
+
+In response, an array of objects will arrive, which should be fed to the `groupAggregatedTrades()`
+function, the array will be sorted by coins and grouped by trades:
+```json
+[
+   {
+      "symbol":"NKNUSDT",
+      "id":57856665,
+      "orderId":1243901519,
+      "side":"BUY",
+      "price":"0.38080",
+      "qty":"132",
+      "realizedPnl":"0",
+      "marginAsset":"USDT",
+      "quoteQty":"49.92240",
+      "commission":"0.00998448",
+      "commissionAsset":"USDT",
+      "time":1640945904886,
+      "positionSide":"BOTH",
+      "buyer":true,
+      "maker":true
+   },
+   {
+      "symbol":"NKNUSDT",
+      "id":57858773,
+      "orderId":1243921202,
+      "side":"SELL",
+      "price":"0.37820",
+      "qty":"132",
+      "realizedPnl":"-0.34320000",
+      "marginAsset":"USDT",
+      "quoteQty":"50.26560",
+      "commission":"0.01005312",
+      "commissionAsset":"USDT",
+      "time":1640947616268,
+      "positionSide":"BOTH",
+      "buyer":false,
+      "maker":true
+   }
+]
+```
 
 ```js
-const trades = tradeAggregator(rawTrades);
-```
+const responseFromAPI = '...';
+const rawTrades = JSON.parse(responseFromAPI);
 
-Result:
-
+const result = groupAggregatedTrades(rawTrades);
 ```
+As a result, you will receive an aggregated report in a convenient format:
+```js
+[
   {
-    openTime: 1640341654465,
-    closeTime: 1640341672566,
-    symbol: "1000SHIBUSDT",
+    closeTime: 1640947616268,
+    fee: "$0.02",
+    openTime: 1640945904886,
+    priceChangeInPercent: "-0.69%",
+    priceClose: "$0.37820",
+    priceOpen: "$0.38080",
+    profit: "-$0.36",
+    quantity: "132",
     side: "LONG",
-    priceOpen: "$0.038400",
-    priceClose: "$0.038416",
-    quantity: "1000",
-    fee: "$0.03",
-    profit: "-$0.01",
-    priceChangeInPercent: "0.04%",
-    volume: "$38.40"
-  }
+    symbol: "NKNUSDT",
+    volume: "$50.27",
+  },
+]
 ```
 
-For more examples read tests :)
-
-### Exchange support
-
-Binance
