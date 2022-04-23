@@ -5,7 +5,7 @@ describe("Testing symbol props", () => {
   it("Searching prop", () => {
     expect(getProps("BTCUSDT")).eql({
       s: "BTCUSDT",
-      t: "0.01",
+      t: "0.10",
     });
   });
   it("Default props", () => {
