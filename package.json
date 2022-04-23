@@ -19,10 +19,8 @@
   },
   "homepage": "https://github.com/nsrwork/crypto-trading-history",
   "devDependencies": {
+    "currency.js": "^2.0.4",
     "prettier": "2.6.2",
     "vitest": "^0.9.3"
-  },
-  "dependencies": {
-    "currency.js": "^2.0.4"
   }
 }
