@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
   },
   "repository": {
     "type": "git",
