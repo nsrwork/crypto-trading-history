@@ -2,7 +2,9 @@ export function calPriceChangeInPercentage(openPrice, closePrice) {
   const close = openPrice > closePrice ? openPrice : closePrice;
   const open = closePrice < openPrice ? closePrice : openPrice;
 
-  return Math.abs(((Number(close) - Number(open)) / Number(open)) * 100);
+  const result = Math.abs((Number(close) - Number(open)) / Number(open));
+
+  return new Intl.NumberFormat("en-US", { style: "percent" }).format(result);
 }
 
 export function calAveragePrice(list) {

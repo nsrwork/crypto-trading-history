@@ -1,8 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  calAveragePrice,
-  calPriceChangeInPercentage,
-} from "./utils";
+import { calAveragePrice, calPriceChangeInPercentage } from "./utils";
 
 describe("Testing util functions", () => {
   it("Calculate a price change in percentage", () => {
@@ -21,14 +18,18 @@ describe("Testing util functions", () => {
       },
       {
         openPrice: "200",
-        closePrice: "100",
+        closePrice: "120",
+      },
+      {
+        openPrice: "200",
+        closePrice: "200",
       },
     ];
     expect(
       mock.map((item) =>
         calPriceChangeInPercentage(item.openPrice, item.closePrice)
       )
-    ).eql([100, 100, 100, 100]);
+    ).eql(["100%", "100%", "100%", "67%", "0%"]);
   });
 
   it("Calculate an average price", () => {
