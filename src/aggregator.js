@@ -1,13 +1,9 @@
 import { Trade } from "./Trade";
-import { getProps } from "./symbolProperties";
-import { calPricePrecision } from "./utils";
 
 export function tradeAggregator(rawTrades) {
   const trade = new Trade();
 
   for (const raw of rawTrades) {
-    let symbolProps = getProps(raw.symbol);
-
     if (!trade.isPositionOpen()) {
       // skip old trade
       if (raw.realizedPnl !== "0") {
@@ -18,8 +14,6 @@ export function tradeAggregator(rawTrades) {
         symbol: raw.symbol,
         side: raw.side,
         openTime: raw.time,
-        tickSize: symbolProps.t,
-        pricePrecision: calPricePrecision(symbolProps.t),
       });
     }
 
@@ -38,8 +32,6 @@ export function tradeAggregator(rawTrades) {
         symbol: raw.symbol,
         side: raw.side,
         openTime: raw.time,
-        tickSize: symbolProps.t,
-        pricePrecision: calPricePrecision(symbolProps.t),
       });
       trade.modifyPosition({
         side: raw.side,
