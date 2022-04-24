@@ -10,7 +10,9 @@ class Calculation {
     const precision = calPrecision(raw);
 
     if (precision > 0 && this.precision > 0) {
-      return Number(((this.number * this.precision) + (Number(raw) * precision)) / precision).toFixed(precision);
+      return Number(
+        (this.number * this.precision + Number(raw) * precision) / precision
+      ).toFixed(precision);
     }
 
     return this.number + Number(raw);
@@ -25,7 +27,9 @@ class Calculation {
     }
 
     if (precision > 0 && this.precision > 0) {
-      return Number(((this.number * this.precision) - (Number(raw) * precision)) / precision).toFixed(precision);
+      return Number(
+        (this.number * this.precision - Number(raw) * precision) / precision
+      ).toFixed(precision);
     }
 
     return this.number - Number(raw);
@@ -39,7 +43,9 @@ class Calculation {
       return 0;
     }
 
-   return trimZero((this.number * Number(raw)).toFixed(precision + this.precision));
+    return trimZero(
+      (this.number * Number(raw)).toFixed(precision + this.precision)
+    );
   }
 }
 
@@ -52,13 +58,13 @@ function calPrecision(raw) {
 }
 
 export function add(...number) {
-  return (new Calculation(number[0]).add(number[1])).toString();
+  return new Calculation(number[0]).add(number[1]).toString();
 }
 
 export function subtract(...number) {
-  return (new Calculation(number[0]).subtract(number[1])).toString();
+  return new Calculation(number[0]).subtract(number[1]).toString();
 }
 
 export function multiply(...number) {
-  return (new Calculation(number[0]).multiply(number[1])).toString();
+  return new Calculation(number[0]).multiply(number[1]).toString();
 }
