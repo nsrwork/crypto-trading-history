@@ -1,12 +1,15 @@
-import { calAveragePrice, calPriceChangeInPercentage } from "./utils";
-import currency from "currency.js";
+import {
+  calAveragePrice,
+  calPriceChangeInPercentage,
+  currencyNormalizer,
+  getPrecision,
+} from "./utils";
+import { add, subtract, multiply } from "./calculation";
 
 export class Trade {
   constructor() {
     this.isOpen = false;
     this.symbol = "";
-    this.tickSize = 0;
-    this.pricePrecision = 0;
     this.openPrice = [];
     this.closePrice = [];
     this.openTime = 0;
@@ -25,42 +28,44 @@ export class Trade {
   }
 
   getAverageOpenPrice() {
-    return currency(calAveragePrice(this.openPrice), {
-      precision: this.pricePrecision,
-    }).format();
+    return this.getAveragePrice(this.openPrice);
   }
 
   getAverageClosePrice() {
-    return currency(calAveragePrice(this.closePrice), {
-      precision: this.pricePrecision,
-    }).format();
+    return this.getAveragePrice(this.closePrice);
+  }
+
+  getAveragePrice(price) {
+    const averagePrice = calAveragePrice(price);
+    const precision = getPrecision(price[0]);
+
+    return currencyNormalizer(averagePrice, {
+      maximumFractionDigits: precision,
+    });
   }
 
   getPriceChangeInPercent() {
     const percentChange = calPriceChangeInPercentage(
       calAveragePrice(this.openPrice),
       calAveragePrice(this.closePrice)
-    ).toFixed(2);
+    );
 
-    return this.pnl < 0 ? `-${percentChange}%` : `${percentChange}%`;
+    return this.pnl < 0 ? "-" + percentChange : percentChange;
   }
 
   calVolume() {
-    if (this.volume.current > this.volume.max) {
+    if (Number(this.volume.current) > Number(this.volume.max)) {
       this.volume.max = this.volume.current;
     }
   }
 
   addVolume({ quantity, price }) {
-    quantity = currency(quantity).divide(this.tickSize);
-    this.volume.current = currency(quantity)
-      .multiply(price)
-      .add(this.volume.current).value;
+    this.volume.current = add(multiply(quantity, price), this.volume.current);
     this.calVolume();
   }
 
   getVolume() {
-    return currency(this.volume.max).multiply(this.tickSize).format();
+    return currencyNormalizer(this.volume.max);
   }
 
   calPositionSize() {
@@ -70,57 +75,45 @@ export class Trade {
   }
 
   addSizeToPosition(size) {
-    size = currency(size).divide(this.tickSize);
-    this.positionSize.current = currency(this.positionSize.current).add(
-      size
-    ).value;
+    this.positionSize.current = add(size, this.positionSize.current);
     this.calPositionSize();
   }
 
   subtractSizeFromPosition(size) {
-    size = currency(size).divide(this.tickSize);
-    this.positionSize.current = currency(this.positionSize.current).subtract(
-      size
-    ).value;
+    this.positionSize.current = subtract(this.positionSize.current, size);
   }
 
   getMaxPositionSize() {
-    return currency(this.positionSize.max)
-      .multiply(this.tickSize)
-      .value.toString();
+    return this.positionSize.max;
   }
 
   getRestOfPositionSize() {
-    return Math.abs(
-      currency(this.positionSize.current).multiply(this.tickSize).value
-    );
+    return Math.abs(this.positionSize.current);
   }
 
   addPnl(pnl) {
-    this.pnl = currency(this.pnl).add(pnl);
+    this.pnl = add(this.pnl, pnl);
   }
 
   getProfit() {
-    return currency(this.pnl).subtract(this.fees).format();
+    return currencyNormalizer(subtract(this.pnl, this.fees));
   }
 
   getFees() {
-    return currency(this.fees).format();
+    return currencyNormalizer(this.fees);
   }
 
   addFees(fees) {
-    this.fees = currency(this.fees).add(fees);
+    this.fees = add(fees, this.fees);
   }
 
   getSide() {
     return this.side === "BUY" ? "LONG" : "SHORT";
   }
 
-  openNewPosition({ symbol, side, openTime, tickSize, pricePrecision }) {
+  openNewPosition({ symbol, side, openTime }) {
     this.isOpen = true;
     this.symbol = symbol;
-    this.tickSize = tickSize;
-    this.pricePrecision = pricePrecision;
     this.openPrice = [];
     this.closePrice = [];
     this.openTime = openTime;

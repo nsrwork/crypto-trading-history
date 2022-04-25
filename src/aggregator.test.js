@@ -87,10 +87,10 @@ describe("Testing Trade Cases", () => {
         closeTime: 1640341672566,
         symbol: "1000SHIBUSDT",
         side: "LONG",
-        priceOpen: "$0.038400",
+        priceOpen: "$0.0384",
         priceClose: "$0.038416",
         quantity: "1000",
-        fee: "$0.03",
+        fee: "$0.02",
         profit: "-$0.01",
         priceChangeInPercent: "0.04%",
         volume: "$38.40",
@@ -111,7 +111,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("Close yesterday's trade and open new ones", () => {
+  it("Close an unknown trade and open a new one", () => {
     const rawTrades = [
       {
         symbol: "IOTXUSDT",
@@ -120,7 +120,7 @@ describe("Testing Trade Cases", () => {
         side: "SELL",
         price: "0.14087",
         qty: "1500",
-        realizedPnl: "1.68000000",
+        realizedPnl: "1.68000000", // non-zero Pnl means that there is a deal to close the previous trade
         marginAsset: "USDT",
         quoteQty: "211.30500",
         commission: "0.08452200",
@@ -173,7 +173,7 @@ describe("Testing Trade Cases", () => {
         openTime: 1640599699242,
         priceChangeInPercent: "1.62%",
         priceClose: "$0.14776",
-        priceOpen: "$0.14540",
+        priceOpen: "$0.1454",
         profit: "$0.61",
         quantity: "250",
         side: "LONG",
@@ -183,7 +183,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("Losing long trade", () => {
+  it("Losing trade to buy", () => {
     const rawTrades = [
       {
         symbol: "NKNUSDT",
@@ -227,8 +227,8 @@ describe("Testing Trade Cases", () => {
         fee: "$0.02",
         openTime: 1640945904886,
         priceChangeInPercent: "-0.69%",
-        priceClose: "$0.37820",
-        priceOpen: "$0.38080",
+        priceClose: "$0.3782",
+        priceOpen: "$0.3808",
         profit: "-$0.36",
         quantity: "132",
         side: "LONG",
@@ -238,7 +238,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("Losing short trade", () => {
+  it("Losing trade to sell", () => {
     const rawTrades = [
       {
         symbol: "SXPUSDT",
@@ -283,7 +283,7 @@ describe("Testing Trade Cases", () => {
         openTime: 1640871981131,
         priceChangeInPercent: "-0.91%",
         priceClose: "$1.8648",
-        priceOpen: "$1.8480",
+        priceOpen: "$1.848",
         profit: "-$0.40",
         quantity: "26.3",
         side: "SHORT",
@@ -293,7 +293,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("Profitable long trade", () => {
+  it("Profitable trade to buy", () => {
     const rawTrades = [
       {
         symbol: "NKNUSDT",
@@ -337,8 +337,8 @@ describe("Testing Trade Cases", () => {
         fee: "$0.02",
         openTime: 1640945904886,
         priceChangeInPercent: "0.69%",
-        priceClose: "$0.38080",
-        priceOpen: "$0.37820",
+        priceClose: "$0.3808",
+        priceOpen: "$0.3782",
         profit: "$0.32",
         quantity: "132",
         side: "LONG",
@@ -348,7 +348,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("Profitable short trade", () => {
+  it("Profitable trade to sell", () => {
     const rawTrades = [
       {
         symbol: "SXPUSDT",
@@ -460,9 +460,9 @@ describe("Testing Trade Cases", () => {
         fee: "$0.09",
         openTime: 1640871981131,
         priceChangeInPercent: "0.87%",
-        priceClose: "$1.8460",
-        priceOpen: "$1.8620",
-        profit: "$1.17",
+        priceClose: "$1.846",
+        priceOpen: "$1.862",
+        profit: "$1.18",
         quantity: "78.9",
         side: "SHORT",
         symbol: "SXPUSDT",
@@ -471,7 +471,7 @@ describe("Testing Trade Cases", () => {
     ]);
   });
 
-  it("One profitable short trade and one profitable long trade", () => {
+  it("One profitable trade to sell and another profitable trade to buy", () => {
     const rawTrades = [
       {
         symbol: "SXPUSDT",
@@ -549,7 +549,7 @@ describe("Testing Trade Cases", () => {
         fee: "$0.03",
         openTime: 1640871981131,
         priceChangeInPercent: "0.85%",
-        priceClose: "$1.8490",
+        priceClose: "$1.849",
         priceOpen: "$1.8648",
         profit: "$0.31",
         quantity: "26.3",
@@ -562,8 +562,8 @@ describe("Testing Trade Cases", () => {
         fee: "$0.02",
         openTime: 1640945904886,
         priceChangeInPercent: "0.69%",
-        priceClose: "$0.38080",
-        priceOpen: "$0.37820",
+        priceClose: "$0.3808",
+        priceOpen: "$0.3782",
         profit: "$0.32",
         quantity: "132",
         side: "LONG",

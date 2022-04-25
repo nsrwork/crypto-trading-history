@@ -1,8 +1,10 @@
+import {add, divide, subtract} from "./calculation";
+
 export function calPriceChangeInPercentage(openPrice, closePrice) {
   const close = openPrice > closePrice ? openPrice : closePrice;
   const open = closePrice < openPrice ? closePrice : openPrice;
 
-  const result = Math.abs((Number(close) - Number(open)) / Number(open));
+  const result = Math.abs(divide(subtract(close, open), open));
 
   return new Intl.NumberFormat("en-US", {
     style: "percent",
@@ -11,10 +13,14 @@ export function calPriceChangeInPercentage(openPrice, closePrice) {
 }
 
 export function calAveragePrice(list) {
-  return list.reduce((a, b) => Number(a) + Number(b), 0) / list.length;
+  return list.reduce((a, b) => add(a, b), 0) / list.length;
 }
 
-export function financeFormat(number, options = {}) {
+export function getPrecision(price) {
+  return +price.slice(price.indexOf("."), price.length).length - 1;
+}
+
+export function currencyNormalizer(money, options = {}) {
   return new Intl.NumberFormat(
     "en-US",
     Object.assign(
@@ -25,5 +31,5 @@ export function financeFormat(number, options = {}) {
       },
       options
     )
-  ).format(number);
+  ).format(money);
 }

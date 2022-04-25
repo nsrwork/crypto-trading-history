@@ -1,57 +1,17 @@
-class Calculation {
-  constructor(raw = 0) {
-    raw = trimZero(raw);
-    this.number = Number(raw);
-    this.precision = calPrecision(raw);
-  }
-
-  add(raw = 0) {
-    raw = trimZero(raw);
-    const precision = calPrecision(raw);
-
-    if (precision > 0 && this.precision > 0) {
-      return Number(
-        (this.number * this.precision + Number(raw) * precision) / precision
-      ).toFixed(precision);
-    }
-
-    return this.number + Number(raw);
-  }
-
-  subtract(raw = 0) {
-    return this.number - Number(raw);
-  }
-
-  multiply(raw = 0) {
-    raw = trimZero(raw);
-    const precision = calPrecision(raw);
-
-    if (this.number <= 0 || Number(raw) <= 0) {
-      return 0;
-    }
-
-    return trimZero(
-      (this.number * Number(raw)).toFixed(precision + this.precision)
-    );
-  }
-}
-
-function trimZero(raw) {
-  return Number(raw).toString();
-}
-
-function calPrecision(raw) {
-  return Number(raw.slice(raw.indexOf("."), raw.length).length - 1);
-}
+import Fraction from "fraction.js";
 
 export function add(...number) {
-  return new Calculation(number[0]).add(number[1]).toString();
+  return Fraction(number[0]).add(number[1]).valueOf().toString();
 }
 
 export function subtract(...number) {
-  return new Calculation(number[0]).subtract(number[1]).toString();
+  return Fraction(number[0]).sub(number[1]).valueOf().toString();
 }
 
 export function multiply(...number) {
-  return new Calculation(number[0]).multiply(number[1]).toString();
+  return Fraction(number[0]).mul(number[1]).valueOf().toString();
+}
+
+export function divide(...number) {
+  return Fraction(number[0]).div(number[1]).valueOf().toString();
 }

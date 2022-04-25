@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import {calAveragePrice, calPriceChangeInPercentage, financeFormat} from "./utils";
+import {
+  calAveragePrice,
+  calPriceChangeInPercentage,
+  currencyNormalizer,
+} from "./utils";
 
 describe("Testing util functions", () => {
   it("Calculate a price change in percentage", () => {
@@ -45,8 +49,11 @@ describe("Testing util functions", () => {
 
   it("Format price", () => {
     const mock = ["100", "0.1", "0", "-0.001"];
-    expect(mock.map((item) => financeFormat(item))).eql([
-      "$100.00", "$0.10", "$0.00", "-$0.00",
+    expect(mock.map((item) => currencyNormalizer(item))).eql([
+      "$100.00",
+      "$0.10",
+      "$0.00",
+      "-$0.00",
     ]);
   });
 });
