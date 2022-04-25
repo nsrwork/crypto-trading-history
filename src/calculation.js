@@ -19,15 +19,6 @@ class Calculation {
   }
 
   subtract(raw = 0) {
-    raw = trimZero(raw);
-    const precision = calPrecision(raw);
-
-    if (precision > 0 && this.precision > 0) {
-      return Number(
-        (this.number * this.precision - Number(raw) * precision) / precision
-      ).toFixed(precision);
-    }
-
     return this.number - Number(raw);
   }
 

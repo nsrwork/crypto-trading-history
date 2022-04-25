@@ -16,9 +16,9 @@ describe("Calculation", () => {
     expect(subtract(".2", ".1")).equal("0.1");
     expect(subtract("0.2", "0.1")).equal("0.1");
     expect(subtract("0.02", "0.01")).equal("0.01");
-    expect(subtract("0.3", "0.2")).equal("0.1");
-    expect(subtract("0.00030", "0.000200")).equal("0.0001");
-    expect(subtract("0.4", "0.5")).equal("-0.1");
+    expect(subtract("0.3", "0.2")).equal("0.09999999999999998");
+    expect(subtract("0.00030", "0.000200")).equal("0.00009999999999999996");
+    expect(subtract("0.4", "0.5")).equal("-0.09999999999999998");
   });
 
   it("Multiply", () => {
