@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calAveragePrice, calPriceChangeInPercentage } from "./utils";
+import {calAveragePrice, calPriceChangeInPercentage, financeFormat} from "./utils";
 
 describe("Testing util functions", () => {
   it("Calculate a price change in percentage", () => {
@@ -29,7 +29,7 @@ describe("Testing util functions", () => {
       mock.map((item) =>
         calPriceChangeInPercentage(item.openPrice, item.closePrice)
       )
-    ).eql(["100%", "100%", "100%", "67%", "0%"]);
+    ).eql(["100%", "100%", "100%", "66.67%", "0%"]);
   });
 
   it("Calculate an average price", () => {
@@ -40,6 +40,13 @@ describe("Testing util functions", () => {
     ];
     expect(mock.map((item) => calAveragePrice(item))).eql([
       3, 0.34567000000000003, 0.33999999999999997,
+    ]);
+  });
+
+  it("Format price", () => {
+    const mock = ["100", "0.1", "0", "-0.001"];
+    expect(mock.map((item) => financeFormat(item))).eql([
+      "$100.00", "$0.10", "$0.00", "-$0.00",
     ]);
   });
 });
