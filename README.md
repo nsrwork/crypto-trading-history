@@ -26,12 +26,13 @@ The data to be aggregated should be obtained from the API:
 GET /fapi/v1/userTrades
 ```
 
-[API Documentation](https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
+[Binance API Documentation](https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
 
 In response, an array of objects will arrive, which should be fed to the `groupAggregatedTrades()`
 function, the array will be sorted by coins and grouped by trades:
 
 ```json
+// response from binance api
 [
   {
     "symbol": "NKNUSDT",
@@ -86,8 +87,8 @@ As a result, you will receive an aggregated report in a convenient format:
     fee: "$0.02",
     openTime: 1640945904886,
     priceChangeInPercent: "-0.69%",
-    priceClose: "$0.37820",
-    priceOpen: "$0.38080",
+    priceClose: "$0.3782",
+    priceOpen: "$0.3808",
     profit: "-$0.36",
     quantity: "132",
     side: "LONG",
