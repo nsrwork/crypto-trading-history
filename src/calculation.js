@@ -1,11 +1,11 @@
 class Calculation {
-  constructor(raw) {
+  constructor(raw = 0) {
     raw = trimZero(raw);
     this.number = Number(raw);
     this.precision = calPrecision(raw);
   }
 
-  add(raw) {
+  add(raw = 0) {
     raw = trimZero(raw);
     const precision = calPrecision(raw);
 
@@ -18,13 +18,9 @@ class Calculation {
     return this.number + Number(raw);
   }
 
-  subtract(raw) {
+  subtract(raw = 0) {
     raw = trimZero(raw);
     const precision = calPrecision(raw);
-
-    if (this.number < Number(raw)) {
-      return 0;
-    }
 
     if (precision > 0 && this.precision > 0) {
       return Number(
@@ -35,7 +31,7 @@ class Calculation {
     return this.number - Number(raw);
   }
 
-  multiply(raw) {
+  multiply(raw = 0) {
     raw = trimZero(raw);
     const precision = calPrecision(raw);
 
