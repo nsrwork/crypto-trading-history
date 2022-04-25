@@ -1,4 +1,4 @@
-import {add, divide, subtract} from "./calculation";
+import { add, divide, subtract } from "./calculation";
 
 export function calPriceChangeInPercentage(openPrice, closePrice) {
   const close = openPrice > closePrice ? openPrice : closePrice;
