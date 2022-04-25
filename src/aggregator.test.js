@@ -572,4 +572,76 @@ describe("Testing Trade Cases", () => {
       },
     ]);
   });
+
+  it("Open trade to buy in parts and close by take profit", () => {
+    const rawTrades = [
+      {
+        symbol: "BTCUSDT",
+        id: 2148568547,
+        orderId: 51243483853,
+        side: "BUY",
+        price: "39730",
+        qty: "0.002",
+        realizedPnl: "0",
+        marginAsset: "USDT",
+        quoteQty: "79.46000",
+        commission: "0.01589200",
+        commissionAsset: "USDT",
+        time: 1650727636555,
+        positionSide: "BOTH",
+        buyer: true,
+        maker: true,
+      },
+      {
+        symbol: "BTCUSDT",
+        id: 2148581909,
+        orderId: 51243945105,
+        side: "BUY",
+        price: "39735",
+        qty: "0.002",
+        realizedPnl: "0",
+        marginAsset: "USDT",
+        quoteQty: "79.47000",
+        commission: "0.01589399",
+        commissionAsset: "USDT",
+        time: 1650727904831,
+        positionSide: "BOTH",
+        buyer: true,
+        maker: true,
+      },
+      {
+        symbol: "BTCUSDT",
+        id: 2148656379,
+        orderId: 51244250784,
+        side: "SELL",
+        price: "39900",
+        qty: "0.004",
+        realizedPnl: "0.67000000",
+        marginAsset: "USDT",
+        quoteQty: "159.60000",
+        commission: "0.06383999",
+        commissionAsset: "USDT",
+        time: 1650730266213,
+        positionSide: "BOTH",
+        buyer: false,
+        maker: false,
+      },
+    ];
+    const trades = tradeAggregator(rawTrades);
+    expect(trades).eql([
+      {
+        closeTime: 1650730266213,
+        fee: "$0.10",
+        openTime: 1650727636555,
+        priceChangeInPercent: "0.42%",
+        priceClose: "$39,900",
+        priceOpen: "$39,733",
+        profit: "$0.57",
+        quantity: "0.004",
+        side: "LONG",
+        symbol: "BTCUSDT",
+        volume: "$158.93",
+      },
+    ]);
+  });
 });
