@@ -1,6 +1,6 @@
 {
   "name": "crypto-trading-history",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Trade history log aggregated by positions",
   "main": "src/index.js",
   "scripts": {
