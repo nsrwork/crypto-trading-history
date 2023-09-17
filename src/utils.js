@@ -29,7 +29,7 @@ export function currencyNormalizer(money, options = {}) {
         currency: "USD",
         maximumFractionDigits: 2,
       },
-      options
-    )
+      options,
+    ),
   ).format(money);
 }

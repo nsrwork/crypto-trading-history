@@ -31,8 +31,8 @@ describe("Testing util functions", () => {
     ];
     expect(
       mock.map((item) =>
-        calPriceChangeInPercentage(item.openPrice, item.closePrice)
-      )
+        calPriceChangeInPercentage(item.openPrice, item.closePrice),
+      ),
     ).eql(["100%", "100%", "100%", "66.67%", "0%"]);
   });
 

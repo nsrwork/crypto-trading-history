@@ -47,7 +47,7 @@ export class Trade {
   getPriceChangeInPercent() {
     const percentChange = calPriceChangeInPercentage(
       calAveragePrice(this.openPrice),
-      calAveragePrice(this.closePrice)
+      calAveragePrice(this.closePrice),
     );
 
     return this.pnl < 0 ? "-" + percentChange : percentChange;
@@ -69,7 +69,7 @@ export class Trade {
   }
 
   calPositionSize() {
-    if (this.positionSize.current > this.positionSize.max) {
+    if (Number(this.positionSize.current) > Number(this.positionSize.max)) {
       this.positionSize.max = this.positionSize.current;
     }
   }
