@@ -5,7 +5,6 @@ export function tradeAggregator(rawTrades) {
 
   for (const raw of rawTrades) {
     if (!trade.isPositionOpen()) {
-      // skip old trade
       if (raw.realizedPnl !== "0") {
         continue;
       }
@@ -38,6 +37,7 @@ export function tradeAggregator(rawTrades) {
         price: raw.price,
         quantity: raw.qty,
         realizedPnl: raw.realizedPnl,
+        fees: 0,
       });
 
       continue;

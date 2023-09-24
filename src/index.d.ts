@@ -1,64 +1,83 @@
-// Trade.js
-export declare class Trade {
-  constructor();
-  getAverageOpenPrice(): any;
-  getAverageClosePrice(): any;
-  getAveragePrice(price: any): any;
-  getPriceChangeInPercent(): any;
-  calVolume(): void;
-  addVolume({ quantity, price }: {
-    quantity: any;
-    price: any;
-  }): void;
-  getVolume(): any;
-  calPositionSize(): void;
-  addSizeToPosition(size: any): void;
-  subtractSizeFromPosition(size: any): void;
-  getMaxPositionSize(): any;
-  getRestOfPositionSize(): number;
-  addPnl(pnl: any): void;
-  getProfit(): any;
-  getFees(): any;
-  addFees(fees: any): void;
-  getSide(): "LONG" | "SHORT";
-  openNewPosition({ symbol, side, openTime }: {
-    symbol: any;
-    side: any;
-    openTime: any;
-  }): void;
-  isPositionNotEmpty(): boolean;
-  increasePosition({ price, quantity }: {
-    price: any;
-    quantity: any;
-  }): void;
-  closePosition({ closeTime }: {
-    closeTime: any;
-  }): void;
-  modifyPosition({ side, price, quantity, realizedPnl, fees }: {
-    side: any;
-    price: any;
-    quantity: any;
-    realizedPnl: any;
-    fees: any;
-  }): void;
-  isFlipTrade(): boolean;
-  releaseTrades(): any;
-  isPositionOpen(): any;
+declare module 'aggregator' {
+  import { Trade } from 'Trade';
+
+  export function tradeAggregator(rawTrades: any[]): Trade[];
+
+  export function groupAggregatedTrades(rawData: any[]): Trade[];
+
+  export function groupRawTradesBySymbols(rawData: any[]): any[];
 }
 
-// aggregator.js
-export declare function tradeAggregator(rawTrades: any): any;
-export declare function groupAggregatedTrades(rawData: any): any;
-export declare function groupRawTradesBySymbols(rawData: any): any[][];
+declare module 'calculation' {
+  export function add(num1: string, num2: string): string;
 
-// utils.js
-export declare function calPriceChangeInPercentage(openPrice: any, closePrice: any): string;
-export declare function calAveragePrice(list: any): number;
-export declare function getPrecision(price: any): number;
-export declare function currencyNormalizer(money: any, options?: {}): string;
+  export function subtract(num1: string, num2: string): string;
 
-// calculation.js
-export declare function add(...number: any[]): any;
-export declare function subtract(...number: any[]): any;
-export declare function multiply(...number: any[]): any;
-export declare function divide(...number: any[]): any;
+  export function multiply(num1: string, num2: string): string;
+
+  export function divide(num1: string, num2: string): string;
+}
+
+declare module 'Trade' {
+  export class Trade {
+    constructor();
+
+    getAverageOpenPrice(): string;
+
+    getAverageClosePrice(): string;
+
+    getPriceChangeInPercent(): string;
+
+    calVolume(): void;
+
+    addVolume(data: { quantity: string, price: string }): void;
+
+    getVolume(): string;
+
+    calPositionSize(): void;
+
+    addSizeToPosition(size: string): void;
+
+    subtractSizeFromPosition(size: string): void;
+
+    getMaxPositionSize(): string;
+
+    getRestOfPositionSize(): number;
+
+    addPnl(pnl: string): void;
+
+    getProfit(): string;
+
+    getFees(): string;
+
+    addFees(fees: string): void;
+
+    getSide(): string;
+
+    openNewPosition(data: { symbol: string, side: string, openTime: number }): void;
+
+    isPositionNotEmpty(): boolean;
+
+    increasePosition(data: { price: string, quantity: string }): void;
+
+    closePosition(data: { closeTime: number }): void;
+
+    modifyPosition(data: { side: string, price: string, quantity: string, realizedPnl: string, fees: string }): void;
+
+    isFlipTrade(): boolean;
+
+    releaseTrades(): any[];
+
+    isPositionOpen(): boolean;
+  }
+}
+
+declare module 'utils' {
+  export function calPriceChangeInPercentage(openPrice: string, closePrice: string): string;
+
+  export function calAveragePrice(list: string[]): string;
+
+  export function getPrecision(price: string): number;
+
+  export function currencyNormalizer(money: string, options?: Intl.NumberFormatOptions): string;
+}

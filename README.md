@@ -1,38 +1,35 @@
-### Trade aggregator
+**Trade Aggregator History**
 
-Imagine you open a position and gradually add up to the working volume.
-After reaching the desired price, you decide to close the position, also in parts.
-In fact, it was one trade, but in the reports you will see several transactions at once.
+Do you find yourself making trades in parts, gradually building up to your desired position? Perhaps, after reaching your target price, you decide to close your position in multiple chunks. In essence, it's a single trade, but when you check your reports, you see it as a series of transactions. That's where Trade Aggregator library comes into play.
 
-This library aggregates transactions and displays:
+This library efficiently aggregates these transactions, providing you with:
 
-- complete trade report
-- profit minus commission
-- percentage of price movement
-- the volume that was at the peak in dollars and coins
+- A comprehensive trade report.
+- Profit calculations, minus commission.
+- The percentage movement in the asset's price.
+- The peak volume in both dollars and coins.
 
-### How to install
+**Installation**
+
+To get started, simply install the library with npm:
 
 ```bash
 npm i crypto-trading-history
 ```
 
-### How to use
+**Usage**
 
-Currently, only the Binance Futures crypto exchange is supported.
-The data to be aggregated should be obtained from the API:
+Currently, this library supports the Binance Futures crypto exchange. You'll need to obtain your trading data from the API endpoint:
 
 ```
 GET /fapi/v1/userTrades
 ```
 
-[Binance API Documentation](https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
+You will receive an array of objects in response. These need to be passed to the `groupAggregatedTrades()` function, which will sort and group the data by coins:
 
-In response, an array of objects will arrive, which should be fed to the `groupAggregatedTrades()`
-function, the array will be sorted by coins and grouped by trades:
+Response from Binance API (https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
 
 ```json
-// response from binance api
 [
   {
     "symbol": "NKNUSDT",
@@ -71,14 +68,17 @@ function, the array will be sorted by coins and grouped by trades:
 ]
 ```
 
-```js
-const responseFromAPI = "...";
-const rawTrades = JSON.parse(responseFromAPI);
+Next, you can use the library as follows:
 
-const result = groupAggregatedTrades(rawTrades);
+```js
+import { groupAggregatedTrades } from "crypto-trading-history";
+
+const rawData = JSON.parse(/*Response from Binance API*/);
+
+const aggregatedReport = groupAggregatedTrades(rawData);
 ```
 
-As a result, you will receive an aggregated report in a convenient format:
+As a result, you'll receive an aggregated report in a user-friendly format:
 
 ```js
 [
