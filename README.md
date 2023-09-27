@@ -1,6 +1,6 @@
-**Trade Aggregator Report**
+**Trade Aggregator History**
 
-Do you find yourself making trades in parts, gradually building up to your desired position? Perhaps, after reaching your target price, you decide to close your position in multiple chunks. In essence, it's a single trade, but when you check your reports, you see it as a series of transactions. That's where our Trade Aggregator Library comes into play.
+Do you find yourself making trades in parts, gradually building up to your desired position? Perhaps, after reaching your target price, you decide to close your position in multiple chunks. In essence, it's a single trade, but when you check your reports, you see it as a series of transactions. That's where Trade Aggregator library comes into play.
 
 This library efficiently aggregates these transactions, providing you with:
 
@@ -25,10 +25,10 @@ Currently, this library supports the Binance Futures crypto exchange. You'll nee
 GET /fapi/v1/userTrades
 ```
 
-You will receive an array of objects in response. These need to be passed to the `groupAggregatedTrades()` function, which will sort and group the data by coins:
+You will receive an array of objects in response. These need to be passed to the `groupAggregatedTrades()` function, which will sort and group the data by coins: 
 
+Response from Binance API (https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
 ```json
-// Response from Binance API
 [
   {
     "symbol": "NKNUSDT",
@@ -70,10 +70,9 @@ You will receive an array of objects in response. These need to be passed to the
 Next, you can use the library as follows:
 
 ```js
-const responseFromAPI = "..."; // Replace with your API response
-const rawTrades = JSON.parse(responseFromAPI);
+import { groupAggregatedTrades } from "crypto-trading-history";
 
-const result = groupAggregatedTrades(rawTrades);
+const aggregatedReport = groupAggregatedTrades(JSON.parse(/*Response from Binance API*/));
 ```
 
 As a result, you'll receive an aggregated report in a user-friendly format:
@@ -95,5 +94,3 @@ As a result, you'll receive an aggregated report in a user-friendly format:
   },
 ];
 ```
-
-This library streamlines your trading data, making it easier to analyze and understand your trading performance.
