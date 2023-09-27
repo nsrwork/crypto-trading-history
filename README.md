@@ -72,7 +72,9 @@ Next, you can use the library as follows:
 ```js
 import { groupAggregatedTrades } from "crypto-trading-history";
 
-const aggregatedReport = groupAggregatedTrades(JSON.parse(/*Response from Binance API*/));
+const rawData = JSON.parse(/*Response from Binance API*/)
+
+const aggregatedReport = groupAggregatedTrades(rawData);
 ```
 
 As a result, you'll receive an aggregated report in a user-friendly format:
