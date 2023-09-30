@@ -1,8 +1,9 @@
 {
   "name": "crypto-trading-history",
-  "version": "0.0.4",
-  "description": "Trade history log aggregated by positions",
+  "version": "0.1.0",
+  "description": "A trade aggregator summarizes multiple transactions into a single report and more",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "test": "vitest",
     "coverage": "vitest run --coverage",
@@ -19,7 +20,8 @@
   },
   "homepage": "https://github.com/nsrwork/crypto-trading-history",
   "devDependencies": {
-    "fraction.js": "^4.2.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "decimal.js": "^10.4.3",
     "prettier": "^3.0.3",
     "vitest": "^0.34.4"
   }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { add, multiply, subtract } from "./calculation";
+import { add, multiply, subtract, divide } from "./calculation";
 
 describe("Calculation", () => {
   it("Add", () => {
@@ -31,5 +31,11 @@ describe("Calculation", () => {
     expect(multiply("0.1", "0")).equal("0");
     expect(multiply("0", "1")).equal("0");
     expect(multiply("0.05", "0.02")).equal("0.001");
+  });
+
+  it("Divide", () => {
+    expect(divide("6", "2")).equal("3");
+    expect(divide("24", "8")).equal("3");
+    expect(divide("0.3", "0.1")).equal("3");
   });
 });

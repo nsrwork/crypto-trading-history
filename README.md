@@ -25,9 +25,10 @@ Currently, this library supports the Binance Futures crypto exchange. You'll nee
 GET /fapi/v1/userTrades
 ```
 
-You will receive an array of objects in response. These need to be passed to the `groupAggregatedTrades()` function, which will sort and group the data by coins: 
+You will receive an array of objects in response. These need to be passed to the `groupAggregatedTrades()` function, which will sort and group the data by coins:
 
 Response from Binance API (https://binance-docs.github.io/apidocs/futures/en/#account-trade-list-user_data)
+
 ```json
 [
   {
@@ -72,7 +73,7 @@ Next, you can use the library as follows:
 ```js
 import { groupAggregatedTrades } from "crypto-trading-history";
 
-const rawData = JSON.parse(/*Response from Binance API*/)
+const rawData = JSON.parse(/*Response from Binance API*/);
 
 const aggregatedReport = groupAggregatedTrades(rawData);
 ```

@@ -1,3 +1,6 @@
-migrator.js
-Makefile
-info.json
+.github
+.idea
+/coverage
+.editorconfig
+.prettierrc.json
+.prettierignore
